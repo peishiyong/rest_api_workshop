@@ -12,3 +12,10 @@ bundle exec ruby example.rb
 ```
 
 If all good, you should see 'hello world'. Get a :doughnut: to celebrate!
+
+## Commands
+
+* List tickets: `bundle exec ruby ./runner/list.rb`
+* Create ticket: `bundle exec ruby ./runner/create.rb`
+* Update ticket: `bundle exec ruby ./runner/update.rb`
+* Delete ticket: `bundle exec ruby ./runner/delete.rb`
