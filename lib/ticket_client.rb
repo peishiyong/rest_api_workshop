@@ -21,12 +21,15 @@ class TicketClient
   end
 
   def create_ticket
-    raise NotImplementedError
-
     # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#create-ticket
     endpoint = "/api/v2/tickets.json"
     request_body = {
-      # fill this in
+      ticket: {
+        subject: '[peishi] Where is my order? Very hangry',
+        comment: {
+          body: 'Ordered 2 hours ago, still not deliered!'
+        }
+      }
     }.to_json
 
     response = connection.post(endpoint, request_body)
