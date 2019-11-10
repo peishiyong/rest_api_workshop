@@ -28,10 +28,17 @@ class TicketClient
   end
 
   def update_ticket
-    raise NotImplementedError
-
     # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#update-ticket
-    response = nil # make the faraday call
+
+    id = 155
+    endpoint = "/api/v2/tickets/#{id}.json"
+    request_body = {
+      ticket: {
+        status: 'solved'
+      }
+    }.to_json
+
+    response = connection.put(endpoint, request_body)
     print_response(response)
   end
 
@@ -50,8 +57,8 @@ class TicketClient
     @connection ||= begin
                       Faraday.new(BASE_URL) do |conn|
                         conn.adapter(Faraday.default_adapter)  # make requests with Net::HTTP
-                        # conn.authorization(:Bearer, ENV['API_TOKEN'])
-                        # conn.headers['content-type'] = 'application/json'
+                        conn.authorization(:Bearer, ENV['API_TOKEN'])
+                        conn.headers['content-type'] = 'application/json'
                       end
                     end
   end
