@@ -1,23 +1,27 @@
 require 'faraday'
+require 'json'
+require 'pp'
+
 
 class TicketClient
-  BASE_URL='https://z3npyongtest.zendesk.com/api/v2'
-  API_TOKEN=ENV['API_TOKEN']
+  BASE_URL='https://z3npyongtest.zendesk.com'
 
   def get_tickets
-    # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
     raise NotImplementedError
+
+    # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
   end
 
   def create_ticket
-    # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#create-ticket
     raise NotImplementedError
 
-    request_url = "#{BASE_URL}/tickets.json"
+    # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#create-ticket
+    endpoint = "/api/v2/tickets.json"
     request_body = {
       # fill this in
-    }
-    response = nil # make the faraday call
+    }.to_json
+
+    response = connection.post(endpoint, request_body)
     print_response(response)
   end
 
@@ -40,13 +44,30 @@ class TicketClient
 
   private
 
-  def print_response(response)
-    message = response.success? ? 'HOORAY! :) ' : 'Opps :( '
+  def connection
+    @connection ||= begin
+                      Faraday.new(BASE_URL) do |conn|
+                        conn.adapter(Faraday.default_adapter)  # make requests with Net::HTTP
+                        # conn.basic_auth('pyong@zendesk.com/token', ENV['API_TOKEN'])
+                      end
+                    end
+  end
 
+  def print_response(response)
     puts '----------------------'
-    puts message
-    puts 'Response Status: ' + response.status.to_s
-    puts response.body
+
+    if response.success?
+      puts 'HOORAY! :)'
+      puts 'Response Status: ' + response.status.to_s
+      puts response.body
+    else
+      puts 'Opps :( '
+      puts 'Response Status: ' + response.status.to_s
+      puts response.body
+      puts "\nMore details:"
+      pp response
+    end
+
     puts '----------------------'
   end
 end
