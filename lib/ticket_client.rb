@@ -53,7 +53,7 @@ class TicketClient
     @connection ||= begin
                       Faraday.new(BASE_URL) do |conn|
                         conn.adapter(Faraday.default_adapter)  # make requests with Net::HTTP
-                        # conn.authorization(:Bearer, ENV['API_TOKEN'])
+                        conn.authorization(:Bearer, ENV['API_TOKEN'])
                         # conn.headers['content-type'] = 'application/json'
                       end
                     end
