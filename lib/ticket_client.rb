@@ -36,11 +36,12 @@ class TicketClient
   end
 
   def delete_ticket
-    raise NotImplementedError
-
     # Zendesk doc: https://developer.zendesk.com/rest_api/docs/support/tickets#delete-ticket
 
-    response = nil # make the faraday call here
+    id = 157
+    endpoint = "/api/v2/tickets/#{id}.json"
+
+    response = connection.delete(endpoint)
     print_response(response)
   end
 
@@ -50,7 +51,7 @@ class TicketClient
     @connection ||= begin
                       Faraday.new(BASE_URL) do |conn|
                         conn.adapter(Faraday.default_adapter)  # make requests with Net::HTTP
-                        # conn.authorization(:Bearer, ENV['API_TOKEN'])
+                        conn.authorization(:Bearer, ENV['API_TOKEN'])
                         # conn.headers['content-type'] = 'application/json'
                       end
                     end
