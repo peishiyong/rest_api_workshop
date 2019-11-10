@@ -59,7 +59,10 @@ class TicketClient
     if response.success?
       puts 'HOORAY! :)'
       puts 'Response Status: ' + response.status.to_s
-      pp JSON.parse(response.body)
+      begin
+        pp JSON.parse(response.body)
+      rescue JSON::ParserError
+      end
     else
       puts 'Opps :( '
       puts 'Response Status: ' + response.status.to_s
