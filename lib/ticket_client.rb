@@ -2,6 +2,7 @@ require 'faraday'
 
 class TicketClient
   BASE_URL='https://z3npyongtest.zendesk.com/api/v2'
+  API_TOKEN=ENV['API_TOKEN']
 
   def get_tickets
     # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets

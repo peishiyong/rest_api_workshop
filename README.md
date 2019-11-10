@@ -6,7 +6,15 @@ This is a simple codebase for making api call, for REST Api Workshop Nov 2019.
 
 The script should work with Ruby 2.0 and above.
 
+Assuming you have Ruby installed on your machine, all you need to do is
+clone the project and run a few steps:
+
 ```
+git clone git@github.com:peishiyong/rest_api_workshop.git
+cd rest_api_workshop
+
+cp config/env.yaml.example config/env.yaml
+
 bundle install # if failed, do `gem install bundler` and try again
 bundle exec ruby example.rb
 ```
