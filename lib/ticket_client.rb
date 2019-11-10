@@ -7,10 +7,16 @@ class TicketClient
   BASE_URL='https://z3ndtapiador.zendesk.com'
 
   def list_tickets
-    raise NotImplementedError
     # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
 
-    response = nil # make the faraday call
+    endpoint = "/api/v2/tickets.json"
+    query_param = [
+      'sort_order=desc',
+      'sort_by=created_at',
+      'per_page=15'
+    ].join('&')
+
+    response = connection.get("#{endpoint}?#{query_param}")
     print_response(response)
   end
 
