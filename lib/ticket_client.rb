@@ -59,11 +59,11 @@ class TicketClient
     if response.success?
       puts 'HOORAY! :)'
       puts 'Response Status: ' + response.status.to_s
-      puts response.body
+      pp JSON.parse(response.body)
     else
       puts 'Opps :( '
       puts 'Response Status: ' + response.status.to_s
-      puts response.body
+      pp JSON.parse(response.body)
       puts "\nMore details:"
       pp response
     end
