@@ -7,4 +7,4 @@ end
 
 LoadConfig.load
 
-puts TicketClient.new.get_tickets
+puts TicketClient.new.list_tickets

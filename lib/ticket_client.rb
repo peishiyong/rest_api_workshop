@@ -6,10 +6,12 @@ require 'pp'
 class TicketClient
   BASE_URL='https://z3ndtapiador.zendesk.com'
 
-  def get_tickets
+  def list_tickets
     raise NotImplementedError
-
     # API doc: https://developer.zendesk.com/rest_api/docs/support/tickets#list-tickets
+
+    response = nil # make the faraday call
+    print_response(response)
   end
 
   def create_ticket
