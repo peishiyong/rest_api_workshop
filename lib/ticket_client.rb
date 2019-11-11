@@ -4,7 +4,7 @@ require 'pp'
 
 
 class TicketClient
-  BASE_URL='https://z3npyongtest.zendesk.com'
+  BASE_URL='https://z3ndtapiador.zendesk.com'
 
   def get_tickets
     raise NotImplementedError
@@ -48,7 +48,7 @@ class TicketClient
     @connection ||= begin
                       Faraday.new(BASE_URL) do |conn|
                         conn.adapter(Faraday.default_adapter)  # make requests with Net::HTTP
-                        # conn.basic_auth('pyong@zendesk.com/token', ENV['API_TOKEN'])
+                        # conn.authorization(:Bearer, ENV['API_TOKEN'])
                       end
                     end
   end
