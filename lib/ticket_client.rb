@@ -68,8 +68,11 @@ class TicketClient
       puts 'Opps :( '
       puts 'Response Status: ' + response.status.to_s
       pp JSON.parse(response.body)
-      puts "\nMore details:"
-      pp response
+
+      if ENV['DEBUG']
+        puts "\nMore details:"
+        pp response
+      end
     end
 
     puts '----------------------'
